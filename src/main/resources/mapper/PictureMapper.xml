@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.project.nine_project.mapper.PictureMapper">
+
+    <select id="listPicture" resultType="Picture">
+        select * from picture
+    </select>
+    <select id="listBanner" resultType="Banner">
+        select * from banner order by weight asc
+    </select>
+
+    <select id="findDetailById" resultType="Picture">
+        select * from picture where id =#{picture_id}
+    </select>
+
+    <select id="listPictureBySceId" resultType="Picture">
+        select * from picture where sce_id =#{sceId}
+    </select>
+</mapper>

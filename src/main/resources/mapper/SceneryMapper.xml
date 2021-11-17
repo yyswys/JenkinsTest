@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.project.nine_project.mapper.SceneryMapper">
+
+    <select id="listSceneryByLocation" resultType="Scenery">
+        select * from scenery where location =#{location} order by price
+    </select>
+
+    <select id="findById" resultType="Scenery">
+        select * from scenery where id =#{scenery_id}
+    </select>
+
+    <select id="findByTitle" resultType="Scenery">
+        select * from scenery where title like CONCAT(CONCAT('%',#{scenery_title}),'%')
+    </select>
+
+    <update id="update" parameterType="Scenery">
+        update scenery
+        set
+            level=#{level},
+            level_sum=#{levelSum}
+        where id = #{id}
+    </update>
+</mapper>

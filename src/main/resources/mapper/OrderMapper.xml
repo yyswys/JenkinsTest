@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.project.nine_project.mapper.OrderMapper">
+
+    <select id="findByFour1" resultType="Order1">
+        select * from order1 where user_id=#{user_id} and type1=#{type1} and sce_id=#{sce_id} and preset_time = #{preset_time}
+    </select>
+
+    <select id="findByFour2" resultType="Order1">
+        select * from order1 where user_id=#{user_id} and type1=#{type1} and hotel_id=#{hotel_id} and preset_time = #{preset_time}
+    </select>
+
+    <insert id="saveOrder" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO `order1` (`type1`,`out_trade_no`, `state`,`sum_fee`, `user_id`, `sce_id`, `hotel_id`, `order_time`,`title`, `img`,`level`,`preset_time`,`people_number`)
+        VALUES
+        (#{type1,jdbcType=INTEGER},#{outTradeNo,jdbcType=VARCHAR},#{state,jdbcType=INTEGER},#{sumFee,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},
+         #{sceId,jdbcType=INTEGER},#{hotelId,jdbcType=INTEGER},#{orderTime,jdbcType=TIMESTAMP},#{title,jdbcType=VARCHAR},#{img,jdbcType=VARCHAR},#{level,jdbcType=INTEGER},#{presetTime,jdbcType=TIMESTAMP},#{peopleNumber,jdbcType=INTEGER})
+
+    </insert>
+
+    <select id="listOrderByUserId" resultType="Order1">
+        select * from order1 where user_id=#{user_id} order by order_time desc
+    </select>
+
+    <!--根据id查询订单信息-->
+    <select id="findByOrderId" resultType="Order1">
+        select  * from order1 where id =#{order_id}
+    </select>
+
+    <update id="payAndUpdate" parameterType="Order1">
+        update order1
+        set
+            state= #{state},
+            level= #{level}
+        where id = #{id}
+    </update>
+</mapper>

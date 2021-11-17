@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.project.nine_project.mapper.UserMapper">
+    <insert id="save" parameterType="User">
+
+        INSERT  INTO user (name,account, password,create_time,last_lo_time,money,order_number,head_img,sex,age,job)
+        values (#{name,jdbcType=VARCHAR},#{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP},#{lastLoTime,jdbcType=TIMESTAMP},#{money,jdbcType=INTEGER},#{orderNumber,jdbcType=INTEGER},#{headImg,jdbcType=VARCHAR},
+        #{sex,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},#{job,jdbcType=VARCHAR})
+
+    </insert>
+
+    <!--根据帐号查询用户信息-->
+    <select id="findByAccount" resultType="User">
+
+        select  * from user where account =#{account}
+
+    </select>
+
+    <!--根据帐号和密码查询用户信息-->
+    <select id="findByAccountAndPwd" resultType="User">
+        select * from user where account =#{account} and password=#{password}
+    </select>
+
+    <!--根据帐号和密码查询用户信息-->
+    <select id="loginByAccountAndPwd" resultType="User">
+        select * from user where account =#{account} and password=#{password}
+    </select>
+
+    <!--上一次登录时间，每登录一次更新一次-->
+    <update id="updateByLogin" parameterType="User">
+        update user
+        set
+            name = #{name},
+            account = #{account},
+            password = #{password},
+            create_time = #{createTime},
+            last_lo_time = #{lastLoTime},
+            money = #{money},
+            order_number = #{orderNumber},
+            head_img = #{headImg},
+            sex = #{sex},
+            age = #{age},
+            job = #{job}
+        where id = #{id}
+    </update>
+
+    <!--根据id查询用户信息-->
+    <select id="findByUserId" resultType="User">
+        select  * from user where id =#{user_id}
+    </select>
+
+    <!--下单或充值成功后money值改变-->
+    <update id="changeMoney" parameterType="User">
+        update user
+        set
+            name = #{name},
+            account = #{account},
+            password = #{password},
+            create_time = #{createTime},
+            last_lo_time = #{lastLoTime},
+            money = #{money},
+            order_number = #{orderNumber},
+            head_img = #{headImg},
+            sex = #{sex},
+            age = #{age},
+            job = #{job}
+        where id = #{id}
+    </update>
+</mapper>

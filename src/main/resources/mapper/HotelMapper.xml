@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.project.nine_project.mapper.HotelMapper">
+
+    <select id="listHotelByLocation" resultType="Hotel">
+        select * from hotel where location =#{location} order by price
+    </select>
+
+    <select id="findById" resultType="Hotel">
+        select * from hotel where id =#{hotel_id}
+    </select>
+
+    <update id="update" parameterType="Hotel">
+        update hotel
+        set
+            level=#{level},
+            level_sum=#{levelSum}
+        where id = #{id}
+    </update>
+</mapper>
